@@ -3,6 +3,9 @@
 
 ## 1-Create a ReplicaSet using the below yaml
 
+
+
+
 apiVersion: apps/v1
 kind: ReplicaSet
 metadata:
