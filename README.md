@@ -28,6 +28,7 @@ spec:
         imagePullPolicy: Always
         name: busybox-container
         ![alt text](image.png)
+```
 --------------------
 ## 2-How many PODs are DESIRED in the new-replica-set?
 
@@ -66,7 +67,7 @@ How many pods now
 ## 8-Create a ReplicaSet using the below yaml
 
 There is an issue with the file, so try to fix it.
-
+```yaml
 apiVersion: v1
 kind: ReplicaSet
 metadata:
@@ -84,5 +85,5 @@ spec:
       containers:
       - name: nginx
         image: nginx
-
+```
 ![alt text](image-7.png)
