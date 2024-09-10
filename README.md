@@ -207,11 +207,11 @@ spec:
 ### What is a Namespace?
 #### Logical Partitioning:
 
-    Namespaces allow you to create multiple virtual clusters within a single physical Kubernetes cluster. Each namespace acts as a separate environment where you can deploy and manage resources independently.
+##### Namespaces allow you to create multiple virtual clusters within a single physical Kubernetes cluster. Each namespace acts as a separate environment where you can deploy and manage resources independently.
 
-Resource Isolation:
+#### Resource Isolation:
 
-    Resources like pods, services, and deployments are isolated within a namespace. This means that two resources with the same name can exist in different namespaces without conflicting with each other.
+##### Resources like pods, services, and deployments are isolated within a namespace. This means that two resources with the same name can exist in different namespaces without conflicting with each other.
 
 Scoped Access:
 
