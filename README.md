@@ -28,7 +28,7 @@ spec:
         imagePullPolicy: Always
         name: busybox-container
 ```        
-        ![alt text](image.png)
+![alt text](image.png)
 --------------------
 ## 2-How many PODs are DESIRED in the new-replica-set?
 
