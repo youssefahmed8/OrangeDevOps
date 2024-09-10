@@ -205,38 +205,83 @@ spec:
 ## What is a namespace in Kubernetes, and why is it used?
 
 ### What is a Namespace?
-#### Logical Partitioning:
 
-##### Namespaces allow you to create multiple virtual clusters within a single physical Kubernetes cluster. Each namespace acts as a separate environment where you can deploy and manage resources independently.
+#### Namespaces are a way to organize clusters into virtual sub-clusters — they can be helpful when different teams or projects share a Kubernetes cluster. Any number of namespaces are supported within a cluster, each logically separated from others but with the ability to communicate with each other. Namespaces cannot be nested within each other.
 
-#### Resource Isolation:
+### why is it used?
 
-##### Resources like pods, services, and deployments are isolated within a namespace. This means that two resources with the same name can exist in different namespaces without conflicting with each other.
 
-Scoped Access:
+#### > Allowing teams or projects to exist in their own virtual clusters without fear of impacting each other’s work.
 
-    Namespaces enable fine-grained access control. You can apply Role-Based Access Control (RBAC) policies to manage which users or service accounts have access to resources within a specific namespace.
+#### > Enhancing role-based access controls (RBAC) by limiting users and processes to certain namespaces.
+
+#### > Enabling the dividing of a cluster’s resources between multiple teams and users via resource quotas.
+
+#### > Providing an easy method of separating development, testing, and deployment of containerized applications enabling the entire lifecycle to take place on the same cluster.
+
 ---------------------
-- How do you create a new namespace in Kubernetes using the kubectl command?
+## How do you create a new namespace in Kubernetes using the kubectl command?
+
+#### To view the namespaces in Kubernetes, you can use the command `kubectl get ns` or `kubectl get namespace`. This will provide a list of all the existing namespaces. To create a new namespace, you can use the command `kubectl create namespace dev` or `Kubectl get ns dev`. To verify the creation of the namespace, use kubectl get ns.
+
+#### Resource quotas and policies can be applied to the namespace, ensuring that it does not overuse the cluster resources. This feature is particularly useful when managing multiple teams like the development team, testing team, or other groups. Each team can work within a specific namespace with defined resource quotas and policies.
+
 ---------------------
-- How can you list all namespaces in a Kubernetes cluster?
+## How can you list all namespaces in a Kubernetes cluster?
+
+#### To list all namespaces in a Kubernetes cluster, you can use the `kubectl get namespaces` command. This command retrieves and displays information about all namespaces in the cluster.
+
+![alt text](image-27.png)
 ---------------------
-- What is the default namespace in Kubernetes? What happens if you do not specify a namespace when deploying a resource?
+## What is the default namespace in Kubernetes? What happens if you do not specify a namespace when deploying a resource?
+
+#### In most Kubernetes distributions, the cluster comes with a few default namespaces. Specifically, there are three primary namespaces that Kubernetes ships with:
+
+- **default**: The default namespace where user applications and services are usually created.
+- **kube-system**: Used for Kubernetes system components and internal resources. It is best to leave this namespace alone, especially in managed systems like [Google Kubernetes Engine](https://cloud.google.com/kubernetes-engine/).
+- **kube-public**: Intended for resources meant to be accessible to all users (including unauthenticated users), but it is not widely used in practice.
+
+In most cases, you will primarily interact with the `default` namespace for deploying and managing your applications.
+
 ---------------------
-- How do you delete a namespace in Kubernetes? What happens to the resources within it?
+## How do you delete a namespace in Kubernetes? What happens to the resources within it?
+
+#### To delete a namespace use the command `kubectl delete -f namespace.yaml`
+
+### What Happens to the Resources?
+
+When you delete a namespace, Kubernetes will also delete all the resources contained within that namespace. This includes:
+
+- **Pods**: All pods running in the namespace will be terminated.
+- **Services**: Any services defined in the namespace will be removed.
+- **Deployments, ReplicaSets, and StatefulSets**: These resources will be deleted along with their associated pods.
+- **ConfigMaps and Secrets**: All configuration data and secrets specific to the namespace will be deleted.
+- **Persistent Volume Claims (PVCs)**: PVCs associated with the namespace will be deleted, but whether the associated Persistent Volumes (PVs) are deleted depends on their ReclaimPolicy (e.g., `Delete` or `Retain`).
+
+
 ---------------------
-- How can you switch between namespaces while using the kubectl command?
+## How can you switch between namespaces while using the kubectl command?
 ---------------------
-- How do you create a Kubernetes deployment in a specific namespace?
+## How do you create a Kubernetes deployment in a specific namespace?
 ---------------------
-- Can two different namespaces have resources with the same name? Explain your answer.
+## Can two different namespaces have resources with the same name? Explain your answer.
 ---------------------
-- How can you check the resource quotas and limits for a specific namespace?
+## How can you check the resource quotas and limits for a specific namespace?
 ---------------------
-- How do you configure a kubectl context to always use a specific namespace by default?
+## How do you configure a kubectl context to always use a specific namespace by default?
 ---------------------
-- Create a YAML file to define a new namespace called dev-environment. Deploy it using kubectl.
+## Create a YAML file to define a new namespace called dev-environment. Deploy it using kubectl.
 ---------------------
-- Write a command to deploy a pod named test-pod running the nginx image into a namespace called testing.
+## Write a command to deploy a pod named test-pod running the nginx image into a namespace called testing.
 ---------------------
-- List all the pods running in a namespace called production.
+## List all the pods running in a namespace called production.
+
+
+---------------------
+## Resourses
+[VMware](https://www.vmware.com/topics/kubernetes-namespace)
+[Civo Academy](https://www.civo.com/academy/kubernetes-concepts/kubernetes-namespaces)
+[Kubernetes](https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/)
+[Link Text](URL)
+[Link Text](URL)
+[Link Text](URL)
