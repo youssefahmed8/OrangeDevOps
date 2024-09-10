@@ -1,7 +1,7 @@
 # Kubernetes_lab
 
 
-## 1-Create a ReplicaSet using the below yaml
+## 1- Create a ReplicaSet using the below yaml
 
 ```yaml
 apiVersion: apps/v1
@@ -30,20 +30,20 @@ spec:
 ```        
 ![alt text](image.png)
 --------------------
-## 2-How many PODs are DESIRED in the new-replica-set?
+## 2- How many PODs are DESIRED in the new-replica-set?
 
 ![alt text](image-1.png)
 ----------------------
-## 3-What is the image used to create the pods in the new-replica-set?
+## 3- What is the image used to create the pods in the new-replica-set?
 
 ![alt text](image-2.png)
 
 ---------------------
-## 4-How many PODs are READY in the new-replica-set?
+## 4- How many PODs are READY in the new-replica-set?
 
 ![alt text](image-3.png)
 ---------------------
-## 5-Why do you think the PODs are not ready?
+## 5- Why do you think the PODs are not ready?
 
 These is the current tunning pods 
 ![alt text](image-4.png)
@@ -54,17 +54,17 @@ to describe on of the not ready pods
 ![alt text](image-5.png)
 
 ------------------------
-## 6-Delete any one of the 4 PODs. 
+## 6- Delete any one of the 4 PODs. 
 How many pods now
 
 ![alt text](image-6.png)
 ---------------------
-## 7-Why are there still 4 PODs, even after you deleted one?
+## 7- Why are there still 4 PODs, even after you deleted one?
 
  The ReplicaSet's self-healing mechanism automatically creates a new pod to maintain the desired number of replicas, so you might still see the same total number of pods. This ensures the application remains available and operates with the intended number of replicas.
 
 -----------------
-## 8-Create a ReplicaSet using the below yaml
+## 8- Create a ReplicaSet using the below yaml
 
 There is an issue with the file, so try to fix it.
 ```yaml
@@ -89,7 +89,7 @@ spec:
 ![alt text](image-7.png)
 # Deployment
 
-## 1-Create a deployment called my-first-deployment of image nginx:alpine in the default namespace.
+## 1- Create a deployment called my-first-deployment of image nginx:alpine in the default namespace.
 ### Check to make sure the deployment is healthy.
 ```yaml
 apiVersion: apps/v1
@@ -115,7 +115,7 @@ spec:
 ![alt text](image-8.png)
 
 ----------------
-## 2-Scale my-first-deployment up to run 3 replicas.
+## 2- Scale my-first-deployment up to run 3 replicas.
 ![alt text](image-9.png)
 ### Check to make sure all 3 replicas are ready.
 `kubectl get deployments`
@@ -124,19 +124,19 @@ spec:
 `kubectl describe deployment my-first-deployment`
 ![alt text](image-11.png)
 ----------------
-## 3-Scale my-first-deployment down to run 2 replicas.
+## 3- Scale my-first-deployment down to run 2 replicas.
 `kubectl scale deployment --replicas=2 my-first-deployment`
 ![alt text](image-12.png)
 ---------------
-## 4-Change the image my-first-deployment runs from nginx:alpine to httpd:alpine .
+## 4- Change the image my-first-deployment runs from nginx:alpine to httpd:alpine .
 `kubectl set image deployment/my-first-deployment nginx=httpd:alpine`
 ![alt text](image-13.png)
 --------------------------
-## 5-Delete the deployment my-first-deployment
+## 5- Delete the deployment my-first-deployment
 `kubectl delete deployment my-first-deployment`
 ![alt text](image-15.png)
 ----------------------------
-## 6-Create deployment from the below yaml
+## 6- Create deployment from the below yaml
 
 
 ```yaml
@@ -177,25 +177,25 @@ spec:
 ### edit the image name 
 ![alt text](image-21.png)
 -------------
-## 7-How many ReplicaSets exist on the system now?
+## 7- How many ReplicaSets exist on the system now?
 `kubectl get rs`
 ![alt text](image-22.png)
 ------------------------------
-## 8-How many PODs exist on the system now?
+## 8- How many PODs exist on the system now?
 ` kubectl get po`
 ![alt text](image-23.png)
 -----------------
-## 9-Out of all the existing PODs, how many are ready?
+## 9- Out of all the existing PODs, how many are ready?
 
 ### Based on the last output the 4 PODS are running
 ![alt text](image-24.png)
 
 -------------------
-## 10-What is the image used to create the pods in the new deployment?
+## 10- What is the image used to create the pods in the new deployment?
 `kubectl describe deployment frontend-deployment`
 ![alt text](image-25.png)
 ---------------------
-## 11-Why do you think the deployment is not ready?
+## 11- Why do you think the deployment is not ready?
 
 ### The Reason is there is not image with that name (busybox888)
 ![alt text](image-26.png)
@@ -377,5 +377,3 @@ metadata:
 [Civo Academy](https://www.civo.com/academy/kubernetes-concepts/kubernetes-namespaces)
 [Kubernetes](https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/)
 [Learning-ocean](https://learning-ocean.com/tutorials/kubernetes/kubernetes-delete-resources/)
-[Link Text](URL)
-[Link Text](URL)
