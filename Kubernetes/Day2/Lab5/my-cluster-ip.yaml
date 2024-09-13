@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-app-service
+  namespace: default # Specify your namespace if different
+spec:
+  type: ClusterIP
+  selector:
+    app: my-app # This should match the labels in your Deployment
+  ports:
+    - protocol: TCP
+      port: 80        # Port exposed by the Service inside the cluster
+      targetPort: 8080 # Port on the Pods that the Service forwards traffic to

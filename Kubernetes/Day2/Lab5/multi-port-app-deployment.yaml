@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: multi-port-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: multi-port-app
+  template:
+    metadata:
+      labels:
+        app: multi-port-app
+    spec:
+      containers:
+      - name: multi-port-container
+        image: httpd:alpine  # Using httpd (Apache) for demonstration
+        ports:
+        - containerPort: 80
+        - containerPort: 443

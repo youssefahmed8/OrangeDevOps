@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: new-web-pod-1
+  labels:
+    app: new-web
+spec:
+  containers:
+  - name: new-web-container
+    image: nginx:alpine
+    ports:
+    - containerPort: 80
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: new-web-pod-2
+  labels:
+    app: new-web
+spec:
+  containers:
+  - name: new-web-container
+    image: nginx:alpine
+    ports:
+    - containerPort: 80

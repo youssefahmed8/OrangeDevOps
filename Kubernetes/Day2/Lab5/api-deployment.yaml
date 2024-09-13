@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: api-pod-1
+  labels:
+    app: api
+spec:
+  containers:
+  - name: api-container
+    image: nginx:alpine
+    ports:
+    - containerPort: 80
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: api-pod-2
+  labels:
+    app: api
+spec:
+  containers:
+  - name: api-container
+    image: nginx:alpine
+    ports:
+    - containerPort: 80
