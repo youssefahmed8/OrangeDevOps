@@ -59,7 +59,18 @@
 
 ## 5- Deploy a PersistentVolume (PV) and PersistentVolumeClaim (PVC): Create a YAML file to define a PersistentVolume of 5Gi with ReadWriteOnce access mode. Then, create a PersistentVolumeClaim requesting 2Gi of storage from this PV. Deploy both resources and verify the PVC is bound to the PV.
 
+![alt text](image-3.png)
+
+![alt text](image-4.png)
+
+![alt text](image-5.png)
+
 ## 6- Create a Pod that uses a PVC: Write a YAML definition for a Pod that uses the PVC created in Exercise 3. Mount the PVC to a specific path inside the container and test that the storage is accessible.
+
+![alt text](image-6.png)
+![alt text](image-7.png)
+![alt text](image-8.png)
+
 
 ## 7- Dynamic Provisioning of Persistent Volumes: Create a StorageClass that uses a dynamic provisioner (e.g., AWS EBS, GCE Persistent Disk, or NFS). Deploy a PVC that requests storage dynamically using this StorageClass. Verify that the storage is dynamically provisioned.
 
