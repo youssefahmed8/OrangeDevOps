@@ -1,0 +1,50 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    image: project_backend
+    environment:
+      DB_HOST: db
+      DB_NAME: example
+      DB_USER: root
+      DB_PASSWORD: "0244"  
+      DB_PORT: 3306
+    ports:
+      - "8080:8080"
+    networks:
+      - backend-network
+    depends_on:
+      - db
+
+  db:
+    image: mysql:8.0
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: "0244"  
+      MYSQL_DATABASE: example
+    networks:
+      - backend-network
+    volumes:
+      - db-data:/var/lib/mysql
+
+  proxy:
+    build:
+      context: ./proxy
+      dockerfile: Dockerfile
+    image: project_proxy
+    ports:
+      - "80:80"
+      - "443:443"
+    networks:
+      - backend-network
+    depends_on:
+      - backend
+
+networks:
+  backend-network:
+
+volumes:
+  db-data:
