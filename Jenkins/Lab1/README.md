@@ -68,23 +68,35 @@
 
 - Create a pipeline job named hello-world, it should just echo the Hello World string.
 
+![alt text](image-11.png)
 
 - Install SSH Build Agents Jenkins plugin.
+
+![alt text](image-12.png)
 
 - Create a simple Jenkins job that prints "Hello, World!" in the console output.
 	Set up a basic Freestyle job with a shell command to print a message.
 
+![alt text](image-13.png)
+
 - Configure a Jenkins job to pull code from a public GitHub repository.
 	Use the Git plugin to connect to the repository and check out the latest code.
 
+	![alt text](image-14.png)
+
 - Set up a Jenkins job that triggers every 5 minutes using the "Build periodically" option.
 	Use the cron syntax to configure the trigger.
+	![alt text](image-15.png)
 
 - Install a Jenkins plugin from the Plugin Manager.
 	Pick any plugin (Docker) and verify that it's successfully installed.
 
+	![alt text](image-16.png)
+
 - Configure a Jenkins job to send email notifications when a build fails.
 	Set up the Email Extension Plugin and define an email recipient list.
+	![alt text](image-17.png)
+
 
 - Create a Jenkins pipeline with two stages:
 	Stage 1: Pull code from GitHub(repo from your choise)
