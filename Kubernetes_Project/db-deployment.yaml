@@ -4,7 +4,7 @@ metadata:
   name: db-deployment
   namespace: webapp
 spec:
-  replicas: 1  # Only one instance of the database
+  replicas: 1  
   selector:
     matchLabels:
       app: db

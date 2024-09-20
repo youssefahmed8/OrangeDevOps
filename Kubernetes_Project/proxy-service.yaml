@@ -4,10 +4,10 @@ metadata:
   name: proxy-service
   namespace: webapp
 spec:
-  type: NodePort  # Change from LoadBalancer to NodePort
+  type: NodePort  
   selector:
     app: proxy
   ports:
     - port: 80
       targetPort: 80
-      nodePort: 30427  # You can specify a nodePort if desired
+      nodePort: 30427  

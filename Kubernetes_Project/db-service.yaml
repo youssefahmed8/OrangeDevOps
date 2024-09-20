@@ -9,4 +9,4 @@ spec:
   ports:
     - port: 3306
       targetPort: 3306
-  type: ClusterIP  # Use ClusterIP for internal access
+  type: ClusterIP  

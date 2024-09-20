@@ -19,7 +19,7 @@ spec:
         imagePullPolicy: IfNotPresent
         env:
           - name: DB_HOST
-            value: "db-service"  # Update with the DB service name
+            value: "db-service"  
           - name: DB_NAME
             value: "example"
           - name: DB_USER
