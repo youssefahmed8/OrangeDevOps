@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: db-deployment
+  namespace: webapp
+spec:
+  replicas: 1  # Only one instance of the database
+  selector:
+    matchLabels:
+      app: db
+  template:
+    metadata:
+      labels:
+        app: db
+    spec:
+      containers:
+      - name: mysql
+        image: mysql:8.0
+        imagePullPolicy: IfNotPresent
+        env:
+          - name: MYSQL_ROOT_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: db-credentials
+                key: MYSQL_ROOT_PASSWORD
+          - name: MYSQL_DATABASE
+            value: "example"
+        ports:
+          - containerPort: 3306
+        volumeMounts:
+          - mountPath: /var/lib/mysql  # MySQL data directory
+            name: db-storage
+      volumes:
+        - name: db-storage
+          persistentVolumeClaim:
+            claimName: db-pvc
