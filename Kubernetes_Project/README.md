@@ -121,8 +121,6 @@ ct/proxy/
  => => writing image sha256:effd99d50c378350ddc9e9af0ced0d6a735fe10d96bf7d251286a4b41ad74ff0                                                          0.0s
  => => naming to docker.io/library/project_proxy:latest           
  ```
-
-
 **Run These Commands to create namespace Deployments and Services**
 `kubectl apply -f namespace.yaml`
 `kubectl apply -f backend-deployment.yaml -n webapp`
