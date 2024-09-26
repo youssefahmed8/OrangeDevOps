@@ -91,7 +91,6 @@ db_1       | 2024-09-13T19:05:51.641693Z 0 [System] [MY-011323] [Server] X Plugi
 db_1       | 2024-09-13T19:05:51.642087Z 0 [System] [MY-010931] [Server] /usr/sbin/mysqld: ready for connections. Version: '8.0.39'  socket: '/var/run/mysqld/mysqld.sock'  port: 3306  MySQL Community Server - GPL.
 backend_1  | 2024/09/13 19:05:52 Listening on port 8000
 
-
 ```
 ## Then Go to the browser and type **localhost**
 
