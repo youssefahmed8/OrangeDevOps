@@ -78,8 +78,6 @@ docker build --no-cache -t project_backend:latest /home/youssef/Downloads/Orange
  => => writing image sha256:e90e5e2005532261f90db83636ca227e3e85d395e109f9aa76c4a60795a1aad1                                                          0.0s
  => => naming to docker.io/library/project_backend:latest                 
 ```
-![alt text](image-1.png)
-
  Build Proxy image 
  `docker build --no-cache -t project_proxy:latest /home/youssef/Downloads/OrangeDevOps/Docker_Project/proxy/`
 
