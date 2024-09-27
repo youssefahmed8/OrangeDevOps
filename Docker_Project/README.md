@@ -93,7 +93,7 @@ backend_1  | 2024/09/13 19:05:52 Listening on port 8000
 
 
 ```
-## Then Ho to the browser and type **localhost**
+## Then Go to the browser and type **localhost**
 
 ```bash
 proxy_1    | 172.25.0.1 - - [13/Sep/2024:19:06:28 +0000] "GET / HTTP/1.1" 200 77 "-" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:129.0) Gecko/20100101 Firefox/129.0"
