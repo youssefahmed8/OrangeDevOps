@@ -91,8 +91,9 @@ db_1       | 2024-09-13T19:05:51.641693Z 0 [System] [MY-011323] [Server] X Plugi
 db_1       | 2024-09-13T19:05:51.642087Z 0 [System] [MY-010931] [Server] /usr/sbin/mysqld: ready for connections. Version: '8.0.39'  socket: '/var/run/mysqld/mysqld.sock'  port: 3306  MySQL Community Server - GPL.
 backend_1  | 2024/09/13 19:05:52 Listening on port 8000
 
+
 ```
-## Then Go to the browser and type **localhost**
+## Then Ho to the browser and type **localhost**
 
 ```bash
 proxy_1    | 172.25.0.1 - - [13/Sep/2024:19:06:28 +0000] "GET / HTTP/1.1" 200 77 "-" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:129.0) Gecko/20100101 Firefox/129.0"
