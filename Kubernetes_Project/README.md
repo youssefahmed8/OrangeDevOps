@@ -3,7 +3,7 @@
 Use this command to configure your shell to use the Docker daemon inside Minikube: `eval $(minikube docker-env)`
 `kubectl get all -n webapp` to get all Deployments and Services within the namespace Called `webapp`
 
-## First then We Have To build Our Images 
+## First We Have To build Our Images 
 Starting With mysql image 
 `docker build --no-cache -t mysql-image:latest /home/youssef/Downloads/OrangeDevOps/Docker_Project/mysql`
 ![alt text](image.png)
@@ -122,15 +122,15 @@ ct/proxy/
  => => naming to docker.io/library/project_proxy:latest           
  ```
 **Run These Commands to create namespace Deployments and Services**
-`kubectl apply -f namespace.yaml`
-`kubectl apply -f backend-deployment.yaml -n webapp`
-`kubectl apply -f backend-service.yaml -n webapp`
-`kubectl apply -f db-deployment.yaml -n webapp`
-`kubectl apply -f db-pv-pvc.yaml -n webapp`
-`kubectl apply -f db-secret.yaml -n webapp`
-`kubectl apply -f db-service.yaml -n webapp`
-`kubectl apply -f proxy-deployment.yaml -n webapp`
-`kubectl apply -f proxy-service.yaml -n webapp`
+-`kubectl apply -f namespace.yaml`
+-`kubectl apply -f backend-deployment.yaml -n webapp`
+-`kubectl apply -f backend-service.yaml -n webapp`
+-`kubectl apply -f db-deployment.yaml -n webapp`
+-`kubectl apply -f db-pv-pvc.yaml -n webapp`
+-`kubectl apply -f db-secret.yaml -n webapp`
+-`kubectl apply -f db-service.yaml -n webapp`
+-`kubectl apply -f proxy-deployment.yaml -n webapp`
+-`kubectl apply -f proxy-service.yaml -n webapp`
 ```bash
 namespace/webapp created
 deployment.apps/backend created
