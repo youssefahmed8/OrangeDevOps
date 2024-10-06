@@ -14,12 +14,11 @@ metadata:
 spec:
   storageClassName: local-storage
   capacity:
-    storage: 10Gi
+    storage: 2Gi
   accessModes:
-    - ReadWriteOnce
-  persistentVolumeReclaimPolicy: Retain  # Optional: Defines what happens to the PV when released
+  - ReadWriteOnce
   local:
-    path: /mnt  # Make sure this path exists on the Minikube VM
+    path: /mnt
   nodeAffinity:
     required:
       nodeSelectorTerms:
@@ -27,7 +26,7 @@ spec:
         - key: kubernetes.io/hostname
           operator: In
           values:
-          - minikube  # This should match the node name in Minikube
+          - minikube
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -37,7 +36,7 @@ metadata:
 spec:
   storageClassName: local-storage
   accessModes:
-    - ReadWriteOnce
+  - ReadWriteOnce
   resources:
     requests:
-      storage: 3Gi
+      storage: 2Gi

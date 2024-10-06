@@ -62,7 +62,7 @@ REPOSITORY                    TAG       IMAGE ID       CREATED          SIZE
 jenkins-youssef               latest    014708f322ec   10 seconds ago   518MB
 gcr.io/k8s-minikube/kicbase   v0.0.45   aeed0e1d4642   4 weeks ago      1.28GB
 ```
-Create `cicd` namespace using `kubectl apply -f cicd-namespace.yaml`
+Create `cicd` namespace using `kubectl create namespace cicd`
 
 ![alt text](image.png)
 
@@ -70,19 +70,117 @@ Create Service Account in the same namespace
 
 ![alt text](image-1.png)
 
-Create Storage class
+Create Storage class Pv and Pvc
 
-![alt text](image-3.png)
-
-Create Pv and Pvc
-
-![alt text](image-2.png)
+![alt text](image-6.png)
 
 Create Jenkins Deployment
 
 ![alt text](image-4.png)
 
+Creating Jenkins Service account , Cluster role , Cluster role binding
+
+![alt text](image-2.png)
 
 
+Make sure that jenkins pod is running 
 
+![alt text](image-7.png)
+
+
+open jenkins and create job **Pipline**
+
+```bash
+pipeline {
+    agent any
+    environment {
+        NAMESPACE = 'webapp'
+        REPO_URL = 'https://github.com/youssefahmed8/OrangeDevOps.git'
+    }
+    stages {
+        stage('Setup Namespace') {
+            steps {
+                script {
+                    // Create the webapp namespace if it doesn't exist
+                    sh "kubectl apply -f Kubernetes_Projectnamespace.yaml || echo 'Namespace ${NAMESPACE} already exists.'"
+                }
+            }
+        }
+        stage('Checkout') {
+            steps {
+                // Checkout the repository from the specified URL
+                git branch: 'main', url: "${REPO_URL}"
+            }
+        }
+        stage('Setup Docker Environment') {
+            steps {
+                script {
+                    // Set up Minikube Docker environment
+                    sh "eval \$(minikube docker-env)"
+                }
+            }
+        }
+        stage('Build Backend Image') {
+            steps {
+                script {
+                    // Build the backend Docker image with no cache
+                    sh """
+                    docker build --no-cache -t project_backend:latest -f Docker_Project/backend/Dockerfile Docker_Project/backend
+                    """
+                }
+            }
+        }
+        stage('Build Proxy Image') {
+            steps {
+                script {
+                    // Build the proxy Docker image with no cache
+                    sh """
+                    docker build --no-cache -t project_proxy:latest -f Docker_Project/proxy/Dockerfile Docker_Project/proxy
+                    """
+                }
+            }
+        }
+        stage('Deploy Backend') {
+            steps {
+                script {
+                    // Apply the backend deployment and service
+                    sh '''
+                    kubectl apply -f Kubernetes_Project/backend-deployment.yaml -n ${NAMESPACE}
+                    kubectl apply -f Kubernetes_Project/backend-service.yaml -n ${NAMESPACE}
+                    '''
+                }
+            }
+        }        
+        stage('Deploy Database') {
+            steps {
+                script {
+                    // Apply the database YAML files from Kubernetes_Project
+                    sh '''
+                    kubectl apply -f Kubernetes_Project/db-deployment.yaml -n ${NAMESPACE}
+                    kubectl apply -f Kubernetes_Project/db-pv-pvc.yaml -n ${NAMESPACE}
+                    kubectl apply -f Kubernetes_Project/db-secret.yaml -n ${NAMESPACE}
+                    kubectl apply -f Kubernetes_Project/db-service.yaml -n ${NAMESPACE}
+                    '''
+                }
+            }
+        }
+        stage('Deploy Proxy') {
+            steps {
+                script {
+                    // Apply the proxy deployment and service
+                    sh '''
+                    kubectl apply -f Kubernetes_Project/proxy-deployment.yaml -n ${NAMESPACE}
+                    kubectl apply -f Kubernetes_Project/proxy-service.yaml -n ${NAMESPACE}
+                    '''
+                }
+            }
+        }
+
+    }
+}
+```
+
+Jenkins Pipline overview
+
+![alt text](image-5.png)
 

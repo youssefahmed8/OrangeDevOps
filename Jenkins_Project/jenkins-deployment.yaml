@@ -7,51 +7,67 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: jenkins-server
+      app: jenkins
   template:
     metadata:
       labels:
-        app: jenkins-server
+        app: jenkins
     spec:
       securityContext:
-            fsGroup: 1000
-            runAsUser: 1000
+        fsGroup: 1000
+        runAsUser: 1000
       serviceAccountName: jenkins-admin
+      initContainers:
+      - name: set-docker-sock-permissions
+        image: busybox
+        command: ["sh", "-c", "chown 1000:$(stat -c '%g' /var/run/docker.sock) /var/run/docker.sock"]
+        volumeMounts:
+        - name: docker-sock
+          mountPath: /var/run/docker.sock
+        securityContext:
+          runAsUser: 0  # Run as root to change ownership
       containers:
-        - name: jenkins
-          image: jenkins-youssef/latest
-          resources:
-            limits:
-              memory: "2Gi"
-              cpu: "1000m"
-            requests:
-              memory: "500Mi"
-              cpu: "500m"
-          ports:
-            - name: httpport
-              containerPort: 8080
-            - name: jnlpport
-              containerPort: 50000
-          livenessProbe:
-            httpGet:
-              path: "/login"
-              port: 8080
-            initialDelaySeconds: 90
-            periodSeconds: 10
-            timeoutSeconds: 5
-            failureThreshold: 5
-          readinessProbe:
-            httpGet:
-              path: "/login"
-              port: 8080
-            initialDelaySeconds: 60
-            periodSeconds: 10
-            timeoutSeconds: 5
-            failureThreshold: 3
-          volumeMounts:
-            - name: jenkins-data
-              mountPath: /var/jenkins_home
-      volumes:
+      - name: jenkins
+        image: jenkins-youssef/latest
+        imagePullPolicy: Never
+        resources:
+          limits:
+            memory: "2Gi"
+            cpu: "1000m"
+          requests:
+            memory: "500Mi"
+            cpu: "500m"
+        ports:
+        - name: httpport
+          containerPort: 8080
+        - name: jnlpport
+          containerPort: 50000
+        livenessProbe:
+          httpGet:
+            path: "/login"
+            port: 8080
+          initialDelaySeconds: 90
+          periodSeconds: 10
+          timeoutSeconds: 5
+          failureThreshold: 5
+        readinessProbe:
+          httpGet:
+            path: "/login"
+            port: 8080
+          initialDelaySeconds: 60
+          periodSeconds: 10
+          timeoutSeconds: 5
+          failureThreshold: 3
+        volumeMounts:
         - name: jenkins-data
-          persistentVolumeClaim:
-              claimName: jenkins-pv-claim
+          mountPath: /var/jenkins_home
+        - name: docker-sock
+          mountPath: /var/run/docker.sock
+      volumes:
+      - name: jenkins-data
+        persistentVolumeClaim:
+          claimName: jenkins-pv-claim
+      - name: docker-sock
+        hostPath:
+          path: /var/run/docker.sock
+          type: Socket

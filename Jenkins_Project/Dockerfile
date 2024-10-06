@@ -1,27 +1,34 @@
-# Start with the official Jenkins image
 FROM jenkins/jenkins:lts
 
-# Set environment variables
-ENV KUBECTL_VERSION=v1.26.0
-ENV KUBECTL_BINARY=kubectl
-
-# Switch to root user to install kubectl
 USER root
 
-# Install necessary packages and kubectl
+# Install dependencies for Docker installation
+RUN apt-get update -qq \
+    && apt-get install -qqy apt-transport-https ca-certificates curl gnupg2 software-properties-common
+
+# Add Docker's official GPG key
+RUN curl -fsSL https://download.docker.com/linux/debian/gpg | apt-key add -
+
+# Add Docker's official repository
+RUN add-apt-repository \
+   "deb [arch=amd64] https://download.docker.com/linux/debian $(lsb_release -cs) stable"
+
+# Install Docker CE
+RUN apt-get update -qq \
+    && apt-get -y install docker-ce
+
+# Add the 'jenkins' user to the 'docker' group to allow Jenkins to run Docker commands
+RUN usermod -aG docker jenkins
+
+# Clean up
+RUN apt-get clean
+
 RUN apt-get update && \
-    apt-get install -y curl && \
-    curl -LO "https://dl.k8s.io/release/${KUBECTL_VERSION}/bin/linux/amd64/${KUBECTL_BINARY}" && \
-    chmod +x ${KUBECTL_BINARY} && \
-    mv ${KUBECTL_BINARY} /usr/local/bin/ && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
+    apt-get install -y curl apt-transport-https
 
-# Switch back to the Jenkins user
+# Install kubectl
+RUN curl -LO "https://dl.k8s.io/release/v1.27.0/bin/linux/amd64/kubectl" && \
+    chmod +x ./kubectl && \
+    mv ./kubectl /usr/local/bin/kubectl
+
 USER jenkins
-
-# Expose Jenkins port
-EXPOSE 8080
-
-# Start Jenkins
-ENTRYPOINT ["jenkins.sh"]
