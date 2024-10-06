@@ -88,7 +88,7 @@ Make sure that jenkins pod is running
 ![alt text](image-7.png)
 
 
-open jenkins and create job **Pipline**
+open jenkins and create job **Pipeline**
 
 ```bash
 pipeline {
