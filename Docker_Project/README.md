@@ -1,6 +1,8 @@
 # Docker three tier application
 
-## Objective
+## Overview
+
+This project aims to develop a secure, efficient, and easily maintainable containerized environment using Docker, specifically designed for a Go application. The architecture employs industry best practices, including a multi-stage Dockerfile to optimize the Go application's deployment, secure credential management, HTTPS communication setup, and seamless container orchestration.
 
 We need to build an three tier application (backend,Database,proxy) with docker principles.
 
@@ -8,8 +10,6 @@ We need to build an three tier application (backend,Database,proxy) with docker 
 	- The backend docker file write in multi-stage approach.
 	- The database creadential is in your host machine.
 	- Make sure that proxy is up and running in https protocol and the configuration files is in your host machine.
-	- Kindly make sure that each container is in seperate network.
-	- Make sure that all project is up and down with one command.
 
 ## output
 
