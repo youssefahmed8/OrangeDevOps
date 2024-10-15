@@ -1,4 +1,4 @@
-# Docker three tier application
+# Three-Tier Docker Application
 
 ## Overview
 
