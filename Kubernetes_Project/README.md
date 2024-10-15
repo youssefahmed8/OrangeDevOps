@@ -13,7 +13,6 @@ Use this command to configure your shell to use the Docker daemon inside Minikub
 ## First We Have To build Our Images 
 Starting With mysql image 
 `docker build --no-cache -t mysql-image:latest /home/youssef/Downloads/OrangeDevOps/Docker_Project/mysql`
-![alt text](image.png)
 
 ```bash
 youssef@youssef-virtual-machine:~/Downloads/OrangeDevOps$ docker build --no-cache -t mysql-image:latest /home/youssef/Downloads/OrangeDevOps/Docker_Project/mysql
