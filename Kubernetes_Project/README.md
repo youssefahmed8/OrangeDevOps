@@ -1,4 +1,11 @@
-# Kubernetes Project Overview
+# Kubernetes Project 
+
+![K8s_Project_OverView](https://github.com/user-attachments/assets/8f31987d-cbd1-470a-b37a-16586e6c3fad)
+
+
+This project focuses on deploying a robust, three-tier web application using Kubernetes, specifically designed to run a Go application. The architecture is tailored to ensure efficient resource utilization, scalability, and security, embodying best practices in container orchestration.
+
+
 
 Use this command to configure your shell to use the Docker daemon inside Minikube: `eval $(minikube docker-env)`
 `kubectl get all -n webapp` to get all Deployments and Services within the namespace Called `webapp`
