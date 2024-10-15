@@ -7,7 +7,7 @@ This project aims to streamline the deployment process by leveraging a Jenkins p
 Within this namespace, a pod called "jenkins" will be deployed, which is responsible for establishing a namespace called "webapp."
 - The "webapp" namespace will host a three-tier application architecture, comprising the backend, database, and proxy components, all designed according to Docker principles.
 
-## Starting with building the jenkins image located in the project
+## Starting with building the customized jenkins image located in the project to prevent `Docker in Docker`concept
 
 `docker build -t jenkins-youssef:latest .`
 
